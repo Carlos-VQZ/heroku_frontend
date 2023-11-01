@@ -1,7 +1,7 @@
 function getAll(){
     var request = new XMLHttpRequest;
     //request.open('GET',"http://localhost:8000/contactos");
-    request.open('GET',"https://shm-backend-105ae4e301e9.herokuapp.com/contactos");
+    request.open('GET',"https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos");
     request.send();
 
     request.onload = (e) => {
