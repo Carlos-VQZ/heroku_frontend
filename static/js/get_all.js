@@ -1,6 +1,7 @@
 function getAll(){
+    const URL = "http://localhost:8000/contactos";
     var request = new XMLHttpRequest;
-    request.open('GET',"https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos");
+    request.open('GET',URL);
     request.send();
 
     request.onload = (e) => {
@@ -15,8 +16,7 @@ function getAll(){
         console.log("Telefono: " + json[0]["telefono"]);
 
         const tbody_contactos = document.getElementById("tbody_contactos");
-    
-        for (let i = 0; i < json.length; i++) {
+        for (var i = 0; i < Object.keys(json).length; i++) {
             var tr = document.createElement("tr");
             var td_email = document.createElement("td");
             var td_nombre = document.createElement("td");
@@ -26,11 +26,14 @@ function getAll(){
             td_nombre.innerHTML = json[i]["nombre"];
             td_telefono.innerHTML = json[i]["telefono"];
 
+            console.log("Email: " + json[i]["email"]);
+
             tr.appendChild(td_email);
             tr.appendChild(td_nombre);
             tr.appendChild(td_telefono);
-
             tbody_contactos.appendChild(tr);
         }
+        
+
     };
 };
