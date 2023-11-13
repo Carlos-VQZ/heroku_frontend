@@ -1,7 +1,7 @@
-function getAll(){
+function getAll() {
     const URL = "http://localhost:8000/contactos";
     var request = new XMLHttpRequest;
-    request.open('GET',URL);
+    request.open('GET', URL);
     request.send();
 
     request.onload = (e) => {
@@ -21,6 +21,7 @@ function getAll(){
             var td_email = document.createElement("td");
             var td_nombre = document.createElement("td");
             var td_telefono = document.createElement("td");
+            var td_opciones = document.createElement("td");  // Agrega esta línea para definir td_opciones
 
             td_email.innerHTML = json[i]["email"];
             td_nombre.innerHTML = json[i]["nombre"];
@@ -28,12 +29,27 @@ function getAll(){
 
             console.log("Email: " + json[i]["email"]);
 
+            var enlaceVer = document.createElement('a');
+            enlaceVer.href = 'ver?email=' + json[i]["email"];
+            enlaceVer.textContent = 'Ver';
+            var enlaceEditar = document.createElement('a');
+            enlaceEditar.href = 'editar?email=' + json[i]["email"];
+            enlaceEditar.textContent = 'Editar';
+            var enlaceBorrar = document.createElement('a');
+            enlaceBorrar.href = 'borrar?email=' + json[i]["email"];
+            enlaceBorrar.textContent = 'Borrar';
+
+            td_opciones.appendChild(enlaceVer);
+            td_opciones.appendChild(document.createTextNode('   |   ')); // Agregar un separador
+            td_opciones.appendChild(enlaceEditar);
+            td_opciones.appendChild(document.createTextNode('   |   ')); // Agregar un separador
+            td_opciones.appendChild(enlaceBorrar);
+
             tr.appendChild(td_email);
             tr.appendChild(td_nombre);
             tr.appendChild(td_telefono);
+            tr.appendChild(td_opciones);  // Agrega td_opciones a la fila
             tbody_contactos.appendChild(tr);
         }
-        
-
     };
 };

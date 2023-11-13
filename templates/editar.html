@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Editar Contacto</title>
+    <script type="text/javascript" src="../static/js/edit_one.js"></script>
+</head>
+<body>
+    <div class="header-container">
+        <h1 id="header">Editar Contacto</h1>
+    </div>
+    <div id="contacto-details">
+        <form id="edit-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" readonly>
+            <br>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre">
+            <br>
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono">
+            <br>
+            <button type="button" onclick="editarContacto()">Guardar Cambios</button>
+        </form>
+    </div>
+    <button onclick="goBack()">Regresar</button>
+</body>
+</html>

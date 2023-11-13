@@ -16,5 +16,17 @@ def buscar():
 def insertar():
     return render_template('insertar.html')
 
+@app.route("/ver",methods=["GET"])
+def ver():
+    return render_template('ver.html')
+
+@app.route("/borrar",methods=["GET", "POST"])
+def borrar():
+    return render_template('borrar.html')
+
+@app.route("/editar",methods=["GET", "POST"])
+def editar():
+    return render_template('editar.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
