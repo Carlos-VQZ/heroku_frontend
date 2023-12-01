@@ -3,7 +3,7 @@ const email = urlParams.get('email');
 
 function getContactDetails() {
     var request = new XMLHttpRequest();
-    request.open('GET', "http://localhost:8000/contactos/" + email);
+    request.open('GET', "https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos/" + email);
     request.send();
 
     request.onload = (e) => {

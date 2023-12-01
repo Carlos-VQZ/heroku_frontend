@@ -3,7 +3,7 @@ const email = urlParams.get('email');
 
 function getContactDetails() {
     var request = new XMLHttpRequest();
-    request.open('GET', "http://localhost:8000/contactos/" + email);
+    request.open('GET', "https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos/" + email);
     request.send();
 
     request.onload = (e) => {
@@ -21,7 +21,7 @@ function getContactDetails() {
 function borrarContacto() {
     if (confirm("¿Estás seguro de que deseas borrar este contacto?")) {
         var request = new XMLHttpRequest();
-        request.open('DELETE', "http://localhost:8000/contactos/" + email);
+        request.open('DELETE', "https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos/" + email);
         request.send();
 
         // Redirigir a la página principal después de borrar el contacto
