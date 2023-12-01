@@ -2,14 +2,16 @@
 <html lang="es">
     <head>
         <title>Buscar Contactos</title>
+        <link rel="stylesheet" href="../static/css/styles.css">
         <script type="text/javascript" src="../static/js/get_one.js"></script>
     </head>
     <body>
-        <h1>Buscar contacto</h1>
-            <label for="email">Email</label>
+        <div>
+        <div><h1>Buscar contacto</h1></div>
+            <div><label for="email">Email</label></div>
             <input type="email" id="email">
             <button value="Buscar" onclick="getOne(document.getElementById('email').value)">Buscar</button>
-
+        </div>
         <table border="1" id="table_contactos">
             <thead id="thead_contactos">
                 <th>Email</th>
@@ -19,5 +21,6 @@
             <tbody id="tbody_contactos">
             </tbody>
         </table>
+        <div><button onclick="goBack()">Regresar</button></div>
     </body>
 </html>

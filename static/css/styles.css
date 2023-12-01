@@ -59,6 +59,21 @@ button:hover {
     background-color: #dd6060;
 }
 
+
+#buttonback {
+    background-color: rgb(73, 61, 61)0;
+    color: rgb(24, 17, 17);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-content: cener;
+}
+
+#buttonback:hover {
+    background-color: #dd6060;
+}
+
 form {
     width: 60%;
     margin: 20px auto;
@@ -76,7 +91,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="tel"] {
-    width: 100%;
+    width: 60%;
     padding: 8px;
     margin-bottom: 16px;
     box-sizing: border-box;

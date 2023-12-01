@@ -31,3 +31,7 @@ function getOne(email) {
         tbody_contactos.appendChild(tr);
     };
 };
+
+function goBack() {
+    window.history.back();
+}

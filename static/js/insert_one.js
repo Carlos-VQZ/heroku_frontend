@@ -27,3 +27,7 @@ function insertarContacto() {
 
     request.send(JSON.stringify(data));
 }
+
+function goBack() {
+    window.history.back();
+}

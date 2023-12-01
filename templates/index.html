@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contactos</title>
         <link rel="stylesheet" href="../static/css/styles.css">
         <script type="text/javascript" src="../static/js/get_all.js"></script>
@@ -9,8 +11,10 @@
     <body>
         <div>
             <h1 id="header">Contactos</h1>
-            <a href="insertar">Insertar</a>
-            <a href="buscar">Buscar</a>
+        </div>
+        <div>
+            <button><a href="insertar">Insertar</a></button>
+            <button><a href="buscar">Buscar</a></button>
         </div>
         <table border="1" id="table_contactos">
             <thead id="thead_contactos">
@@ -25,7 +29,7 @@
         <script>
             document.body.onload = getAll();
         </script>
-        
+
     </body>
 </html>
 

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Insertar Contactos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
     <script type="text/javascript" src="../static/js/insert_one.js"></script>
 </head>
 <body>
-    <h1>Insertar nuevo contacto</h1>
+    <div><h1>Insertar nuevo contacto</h1></div>
     <form id="contacto_form">
         <label for="email">Email</label>
         <input type="email" id="email" required><br><br>
@@ -13,7 +16,8 @@
         <input type="text" id="nombre" required><br><br>
         <label for="telefono">Teléfono</label>
         <input type="tel" id="telefono" required><br><br>
-        <button type="button" onclick="insertarContacto()">Insertar Contacto</button>
     </form>
+    <div><button type="button" onclick="insertarContacto()">Insertar Contacto</button></div>
+    <div><button d="buttonback" onclick="goBack()">Regresar</button></div>
 </body>
 </html>
