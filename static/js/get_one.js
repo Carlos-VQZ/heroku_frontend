@@ -1,6 +1,6 @@
 function getOne(email) {
     //var email="john@eamil.com"
-    const URL = "https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos/";
+    const URL = "https://sqlitecontactos-60aff75a79ae.herokuapp.com/contactos";
     //const URL = "ttps://shm-backend-105ae4e301e9.herokuapp.com/contactos";
     var request = new XMLHttpRequest;
     request.open('GET',URL +"/" +email,true);
