@@ -1,55 +1,79 @@
 function getAll() {
-    const URL = "http://localhost:8000/contactos";
-    var request = new XMLHttpRequest;
-    request.open('GET', URL);
-    request.send();
+    var token = sessionStorage.getItem('token');
+    console.log(sessionStorage.getItem('token'));
 
-    request.onload = (e) => {
-        const response = request.responseText;
-        const json = JSON.parse(response);
-        console.log("response: " + response);
-        console.log("json: " + json);
-        console.log("status_code: " + request.status);
+    var requestToken = new XMLHttpRequest();
+    requestToken.open('GET', 'http://localhost:8000/login', true);
+    requestToken.setRequestHeader('Authorization', 'Bearer ' + token);
 
-        console.log("Email: " + json[0]["email"]);
-        console.log("Nombre: " + json[0]["nombre"]);
-        console.log("Telefono: " + json[0]["telefono"]);
+    requestToken.onload = () => {
+        if (requestToken.status === 200) {
+            const URL = "http://localhost:8000/contactos";
 
-        const tbody_contactos = document.getElementById("tbody_contactos");
-        for (var i = 0; i < Object.keys(json).length; i++) {
-            var tr = document.createElement("tr");
-            var td_email = document.createElement("td");
-            var td_nombre = document.createElement("td");
-            var td_telefono = document.createElement("td");
-            var td_opciones = document.createElement("td");  // Agrega esta línea para definir td_opciones
+            var requestContacts = new XMLHttpRequest();
+            requestContacts.open('GET', URL);
+            requestContacts.setRequestHeader('Authorization', 'Bearer ' + token);
 
-            td_email.innerHTML = json[i]["email"];
-            td_nombre.innerHTML = json[i]["nombre"];
-            td_telefono.innerHTML = json[i]["telefono"];
+            requestContacts.onload = () => {
+                if (requestContacts.status === 200) {
+                    const responseContacts = JSON.parse(requestContacts.responseText);
+                    console.log("response: ", responseContacts);
 
-            console.log("Email: " + json[i]["email"]);
+                    // Manejo de la respuesta para mostrar los contactos en tu aplicación
+                    displayContacts(responseContacts);
+                } else {
+                    console.error("Error al obtener contactos. Código de estado:", requestContacts.status);
+                    // Manejo de errores al obtener contactos
+                }
+            };
 
-            var enlaceVer = document.createElement('a');
-            enlaceVer.href = 'ver?email=' + json[i]["email"];
-            enlaceVer.textContent = 'Ver';
-            var enlaceEditar = document.createElement('a');
-            enlaceEditar.href = 'editar?email=' + json[i]["email"];
-            enlaceEditar.textContent = 'Editar';
-            var enlaceBorrar = document.createElement('a');
-            enlaceBorrar.href = 'borrar?email=' + json[i]["email"];
-            enlaceBorrar.textContent = 'Borrar';
-
-            td_opciones.appendChild(enlaceVer);
-            td_opciones.appendChild(document.createTextNode('   |   ')); // Agregar un separador
-            td_opciones.appendChild(enlaceEditar);
-            td_opciones.appendChild(document.createTextNode('   |   ')); // Agregar un separador
-            td_opciones.appendChild(enlaceBorrar);
-
-            tr.appendChild(td_email);
-            tr.appendChild(td_nombre);
-            tr.appendChild(td_telefono);
-            tr.appendChild(td_opciones);  // Agrega td_opciones a la fila
-            tbody_contactos.appendChild(tr);
+            requestContacts.send();
+        } else {
+            console.error("Error al obtener el token. Código de estado:", requestToken.status);
+            // Manejo de errores al obtener el token
         }
     };
-};
+
+    requestToken.send();
+}
+
+function displayContacts(contacts) {
+    const tbody_contactos = document.getElementById("tbody_contactos");
+
+    // Limpiar tabla antes de agregar nuevos contactos
+    tbody_contactos.innerHTML = "";
+
+    contacts.forEach(contact => {
+        var tr = document.createElement("tr");
+        var td_email = document.createElement("td");
+        var td_nombre = document.createElement("td");
+        var td_telefono = document.createElement("td");
+        var td_opciones = document.createElement("td");
+
+        td_email.innerHTML = contact["email"];
+        td_nombre.innerHTML = contact["nombre"];
+        td_telefono.innerHTML = contact["telefono"];
+
+        var enlaceVer = document.createElement('a');
+        enlaceVer.href = 'ver?email=' + contact["email"];
+        enlaceVer.textContent = 'Ver';
+        var enlaceEditar = document.createElement('a');
+        enlaceEditar.href = 'editar?email=' + contact["email"];
+        enlaceEditar.textContent = 'Editar';
+        var enlaceBorrar = document.createElement('a');
+        enlaceBorrar.href = 'borrar?email=' + contact["email"];
+        enlaceBorrar.textContent = 'Borrar';
+
+        td_opciones.appendChild(enlaceVer);
+        td_opciones.appendChild(document.createTextNode('   |   '));
+        td_opciones.appendChild(enlaceEditar);
+        td_opciones.appendChild(document.createTextNode('   |   '));
+        td_opciones.appendChild(enlaceBorrar);
+
+        tr.appendChild(td_email);
+        tr.appendChild(td_nombre);
+        tr.appendChild(td_telefono);
+        tr.appendChild(td_opciones);
+        tbody_contactos.appendChild(tr);
+    });
+}

@@ -2,8 +2,12 @@ const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get('email');
 
 function getContactDetails() {
+    var token = sessionStorage.getItem('token');
+    console.log(sessionStorage.getItem('token'));
+
     var request = new XMLHttpRequest();
     request.open('GET', "http://localhost:8000/contactos/" + email);
+    request.setRequestHeader('Authorization', 'Bearer ' + token); // Agregar el token al encabezado
     request.send();
 
     request.onload = (e) => {
@@ -28,9 +32,11 @@ function editarContacto() {
     var newTelefono = document.getElementById('telefono').value;
 
     if (confirm("¿Estás seguro de que deseas actualizar este contacto?")) {
+        var token = sessionStorage.getItem('token');
+
         var request = new XMLHttpRequest();
         request.open('PUT', "http://localhost:8000/contactos/" + email);
-        
+        request.setRequestHeader('Authorization', 'Bearer ' + token); // Agregar el token al encabezado
         request.setRequestHeader("Content-Type", "application/json");
 
         var updatedData = {
@@ -44,6 +50,6 @@ function editarContacto() {
         request.onload = (e) => {
             alert("Contacto actualizado exitosamente");
             window.history.back();
-        }
+        };
     }
 }

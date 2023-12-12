@@ -1,10 +1,13 @@
 function getOne(email) {
-    //var email="john@eamil.com"
+    var token = sessionStorage.getItem('token');
+    console.log(sessionStorage.getItem('token'));
+
     const URL = "http://localhost:8000/contactos";
-    //const URL = "ttps://shm-backend-105ae4e301e9.herokuapp.com/contactos";
-    var request = new XMLHttpRequest;
-    request.open('GET',URL +"/" +email,true);
+    var request = new XMLHttpRequest();
+    request.open('GET', URL + "/" + email, true);
+    request.setRequestHeader('Authorization', 'Bearer ' + token); // Agregar el token al encabezado
     request.send();
+
     request.onload = () => {
         const response = request.responseText;
         const json = JSON.parse(response);
@@ -12,7 +15,6 @@ function getOne(email) {
         console.log("json: " + json);
 
         const tbody_contactos = document.getElementById("tbody_contactos");
-
         tbody_contactos.innerHTML = null;
 
         var tr = document.createElement("tr");
@@ -30,7 +32,7 @@ function getOne(email) {
 
         tbody_contactos.appendChild(tr);
     };
-};
+}
 
 function goBack() {
     window.history.back();
